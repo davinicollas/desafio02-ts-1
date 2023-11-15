@@ -32,7 +32,7 @@ interface IAppContext {
         setUser(user)
  
     }
-    },[])
+    },[storage])
 
     return(
       <AppContext.Provider value={ { user,isLoggedIn,setIsLoggedIn }}>
