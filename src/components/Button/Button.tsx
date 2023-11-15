@@ -1,18 +1,16 @@
 import { Button } from "@chakra-ui/react"
+import { MouseEventHandler } from "react"
 
 interface iButton {
-    descricao: string,
-    forname: string,
-    event: (param: string) => void
+    event: MouseEventHandler
 }
 
-export const ButtonHellow = ({forname, descricao, event }: iButton) => {
+export const ButtonHellow = ({event }: iButton) => {
 
     return (
-        <Button onClick={() => event(forname)} colorScheme={'blue'} variant={'solid'} size='lg'
+        <Button name="Login" onClick={event} colorScheme={'blue'} variant={'solid'} size='lg'
             border='2px'
-            marginTop="4">
-            {descricao}
+            marginTop="4"> Login
         </Button>
     )
 }
