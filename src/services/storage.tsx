@@ -1,9 +1,26 @@
 interface IDIoBank {
     login:boolean
+    user: { 
+        email: string
+        password: string
+        name: string
+        balance: number
+        id: string
+    }
 }
 const dioPro = {
-    login: false
+    login: false,
+    user: {
+        email: "",
+        password: "",
+        name: "",
+        balance: 1,
+        id: "",
+    }
 }
+
+
+
 
 export const getAllLocalStorage =  (): string | null =>{
     return localStorage.getItem('diobank')

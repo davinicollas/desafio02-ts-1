@@ -5,13 +5,17 @@ import { useContext } from 'react'
 import { AppContext } from "../AppContext"
 import { useNavigate } from 'react-router-dom'
 import { changeLocalStorage } from '../../services/storage'
+import { api } from '../../api'
 
 
 export const Header = () => {
+
   const { setIsLoggedIn , isLoggedIn} = useContext(AppContext)
   const navigate = useNavigate()
-  const logout = () => {
-    changeLocalStorage({login:false})
+  const logout = async () => {
+    const data: any = await api
+
+    changeLocalStorage({login:false, user: data })
     setIsLoggedIn(false)
 
     navigate('/')

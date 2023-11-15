@@ -7,11 +7,14 @@ import { AppContext } from "./components/AppContext"
 
 const MainRoutes = () =>{
     const {isLoggedIn} = useContext(AppContext)
+    const {user} = useContext(AppContext)
+    console.log(user)
+
     return (
         <Routes>
-            <Route path='/' element={<Home />} />
+            <Route path='/' element={isLoggedIn ? <Conta /> : <Home />} />
             <Route path='/conta/:id' element={ isLoggedIn ?  <Conta /> :  <Home />} />
-            <Route path='/info' element={<ContaInfo />} />
+            <Route path='/info' element={ isLoggedIn && user ? <ContaInfo /> :  <Home />} />
         </Routes>
     )
 

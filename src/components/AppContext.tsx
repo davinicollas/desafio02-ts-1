@@ -1,28 +1,39 @@
 import { createContext, useEffect, useState } from "react"
 import { getAllLocalStorage } from "../services/storage"
-import { useFocusEffect } from "@chakra-ui/react"
 
 interface IAppContext {
-    user:string,
+    user:UserData,
     isLoggedIn: boolean,
     setIsLoggedIn: (isLoggedIn: boolean) => void
   }
+
+  interface UserData {
+    email: string
+    password: string
+    name: string
+    balance: number
+    id: string
+  }
   
   export const AppContext = createContext({} as IAppContext )
+ 
   
   export const AppContextProvider = ({ children }:any) => {
     const [ isLoggedIn, setIsLoggedIn] = useState<boolean>(false)
-    
+    const [ user, setUser ] = useState<UserData | any>()
+
     const storage = getAllLocalStorage();
 
     useEffect(()=> {
       if(storage){
         const { login } = JSON.parse(storage)
-        setIsLoggedIn(login)      
+        const { user } = JSON.parse(storage)
+        setIsLoggedIn(login)     
+        setUser(user)
+ 
     }
     },[])
 
-      const user = 'davi test'
     return(
       <AppContext.Provider value={ { user,isLoggedIn,setIsLoggedIn }}>
         { children }

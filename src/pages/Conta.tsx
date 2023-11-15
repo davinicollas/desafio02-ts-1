@@ -1,8 +1,8 @@
-import { Center, SimpleGrid, Spinner } from "@chakra-ui/react";
+import { Center,  SimpleGrid, Spinner, Text } from "@chakra-ui/react";
 import CardInfo from "../components/CardInfo";
 import { useContext, useEffect, useState } from "react";
 import { api } from "../api";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { AppContext } from "../components/AppContext";
 
 interface UserData {
@@ -39,6 +39,7 @@ const  Conta = () => {
       navigate('/')
     }
     return ( 
+      <>
       <Center>
           <SimpleGrid columns={2} spacing={8} paddingTop={16}>
             {
@@ -54,8 +55,13 @@ const  Conta = () => {
                   </>
                 )
             }
+              <Link to='/info'><Text fontSize='x1'>
+                        Informacoes pessoais
+                    </Text></Link>
           </SimpleGrid>
+        
       </Center>
+      </>
    ) 
 }
 

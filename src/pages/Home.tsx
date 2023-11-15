@@ -6,19 +6,24 @@ import { login } from "../services/login";
 import { useNavigate } from "react-router-dom";
 import { AppContext } from "../components/AppContext";
 import { changeLocalStorage } from "../services/storage";
+import { api } from "../api";
 
 const  Home = () => {
    const [email, setEmail] = useState<string>("");
+   const [password, setPassword] = useState<string>("");
+
    const {setIsLoggedIn} = useContext(AppContext)
    const navigate = useNavigate()
 
-   const validate = async (email:string)=>{
-      const logged = await login(email)
+   const validate = async (email:string, password: string)=>{
+      const logged = await login(email, password)
       if(!logged){
         return alert('Email invalido ');
       }
+      const data: any = await api
+
          setIsLoggedIn(true)
-         changeLocalStorage({login:true})
+         changeLocalStorage({login:true , user: data})
          navigate('/conta/1')
       
 
@@ -40,8 +45,9 @@ const  Home = () => {
                      <Input size='sm' type='email' value={email}
                         onChange={(e) => setEmail(e.target.value)} />
                      <FormLabel>Passoword</FormLabel>
-                     <Input size='sm' type='password' />
-                     <ButtonHellow  event={()=>validate(email)} />
+                     <Input size='sm' type='password' value={password}
+                        onChange={(e) => setPassword(e.target.value)}  />
+                     <ButtonHellow  event={()=>validate(email, password)} />
                      </Box>
                   </Center>
                </FormControl>
